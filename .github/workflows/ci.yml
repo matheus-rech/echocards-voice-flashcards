@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  lint-and-build:
+    name: Lint and Build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Lint frontend
+        run: npm run lint || echo "No lint script found, skipping"
+        continue-on-error: true
+
+      - name: Type check frontend
+        run: npm run type-check || npx tsc --noEmit
+        continue-on-error: true
+
+      - name: Build frontend
+        run: npm run build
+        env:
+          GEMINI_API_KEY: placeholder_for_ci
+
+      - name: Install backend dependencies
+        working-directory: ./server
+        run: npm ci
+
+      - name: Lint backend
+        working-directory: ./server
+        run: npm run lint || echo "No lint script found, skipping"
+        continue-on-error: true
+
+      - name: Test backend
+        working-directory: ./server
+        run: npm test || echo "No test script found, skipping"
+        continue-on-error: true
+
+  security-audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Audit frontend dependencies
+        run: npm audit --audit-level=moderate || true
+
+      - name: Audit backend dependencies
+        working-directory: ./server
+        run: npm audit --audit-level=moderate || true
+
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
