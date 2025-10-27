@@ -1,0 +1,22 @@
+{
+  "name": "echocards-backend",
+  "version": "1.0.0",
+  "description": "Backend API proxy for EchoCards to secure Gemini API key",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": ["api-proxy", "gemini", "express"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "helmet": "^7.1.0",
+    "compression": "^1.7.4"
+  }
+}
