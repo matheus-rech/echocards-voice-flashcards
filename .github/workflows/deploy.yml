@@ -37,6 +37,7 @@ jobs:
           # Note: GitHub Pages deployment will have limited functionality
           # without backend API. This is for demonstration purposes only.
           GEMINI_API_KEY: placeholder
+          GITHUB_PAGES: 'true'
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
