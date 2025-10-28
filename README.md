@@ -12,6 +12,19 @@ EchoCards is an innovative study application that combines voice interaction, AI
 
 ![EchoCards Preview](screenshots/app-preview.png)
 
+## 🚀 Deploy to Production
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmatheus-rech%2Fechocards-voice-flashcards&env=GEMINI_API_KEY&envDescription=Google%20Gemini%20API%20key%20required%20for%20AI%20features&envLink=https%3A%2F%2Faistudio.google.com%2Fapikey&project-name=echocards&repository-name=echocards-voice-flashcards)
+
+**One-click deployment with full functionality** - Deploy EchoCards to Vercel in 5 minutes to enable all features including voice, AI, and multimodal capabilities.
+
+📋 **Deployment Options:**
+- **[Vercel (Recommended)](VERCEL_DEPLOYMENT.md)** - ✅ Full functionality (voice + AI + backend) - Deploy in 5 minutes
+- **GitHub Pages** - ⚠️ Frontend only (no voice, no AI features) - [Live Demo](https://matheus-rech.github.io/echocards-voice-flashcards/)
+- **Local Development** - See Quick Start below
+
+> **Note:** GitHub Pages deployment is limited to frontend only. For full functionality including voice commands and AI features, deploy to Vercel using the button above or follow the [detailed guide](VERCEL_DEPLOYMENT.md).
+
 ## ✨ Features
 
 ### 🎤 Voice-Powered Review
